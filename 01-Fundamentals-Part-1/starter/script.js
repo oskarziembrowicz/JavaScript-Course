@@ -33,26 +33,53 @@
 // job = 'teacher';
 
 
-const now = 2037;
-const ageJonas = now - 1991;
-const ageSarah = now - 2018;
-console.log(ageJonas, ageSarah);
-console.log(ageJonas * 2, ageJonas / 10, 2 ** 3);
+// const now = 2037;
+// const ageJonas = now - 1991;
+// const ageSarah = now - 2018;
+// console.log(ageJonas, ageSarah);
+// console.log(ageJonas * 2, ageJonas / 10, 2 ** 3);
+
+// const firstName = "Mark";
+// const lastName = "Lastname";
+// console.log(firstName + ' ' + lastName);
+
+// let x = 10 + 5;
+// x += 10;
+// x *= 4;
+// x++;
+// x--;
+// x--;
+// console.log(x);
+
+// console.log(ageJonas > ageSarah);
+
+// const isSarahFullAge = ageSarah >= 18;
+
+// console.log(now - 1991 > now - 2018);
+
+// let x, y;
+// x = y = 25 - 10 - 5;
+// console.log(x, y)
+
+// const averageAge = (ageJonas + ageSarah) / 2;
 
 const firstName = "Mark";
-const lastName = "Lastname";
-console.log(firstName + ' ' + lastName);
+const job = "progeammer";
+const birthYear = 2002;
+const year = 2037;
 
-let x = 10 + 5;
-x += 10;
-x *= 4;
-x++;
-x--;
-x--;
-console.log(x);
+const mark = "I'm " + firstName + ', a ' + (year - birthYear) + ' years old ' + job + '!';
+console.log(mark);
 
-console.log(ageJonas > ageSarah);
+const markNew = `I'm ${firstName}, a ${year - birthYear} years old ${job}!`;
+console.log(markNew);
 
-const isSarahFullAge = ageSarah >= 18;
+console.log(`Just a regular string...`);
 
-console.log(now - 1991 > now - 2018);
+console.log("String with \n\
+multiple \n\
+lines");
+
+console.log(`String
+multiple
+lines`);

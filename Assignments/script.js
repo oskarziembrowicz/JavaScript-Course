@@ -21,3 +21,7 @@ console.log(moreThanFinland);
 console.log(population < 33);
 description = country + " is in " + continent + ", and its " + population + " million people speak " + language;
 console.log(description);
+
+
+description = `${country} is in ${continent}, and its ${population} million people speak ${language}`;
+console.log(description);
