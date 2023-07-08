@@ -125,14 +125,63 @@
 // console.log(n);
 
 
-const age = '18';
-if (age === 18) console.log('You just turned 18 (strict)');
-if (age == 18) console.log('You just turned 18 (loose)');
+// const age = '18';
+// if (age === 18) console.log('You just turned 18 (strict)');
+// if (age == 18) console.log('You just turned 18 (loose)');
 
-const favourite = Number(prompt("What;s your favourite number?"));
-console.log(favourite);
-console.log(typeof favourite);
+// const favourite = Number(prompt("What;s your favourite number?"));
+// console.log(favourite);
+// console.log(typeof favourite);
 
-if (favourite === 18) {
-    console.log('Good choice');
+// if (favourite === 18) {
+//     console.log('Good choice');
+// }
+
+// const hasDriversLicense = true;
+// const hasGoodVision = true;
+
+// console.log(hasDriversLicense && hasGoodVision);
+// console.log(hasDriversLicense || hasGoodVision);
+
+// const shouldDrive = hasDriversLicense && hasGoodVision;
+
+// if (shouldDrive) {
+//     console.log("Sarah is able to drive");
+// } else {
+//     console.log("Someone else should drive");
+// }
+
+// const isTired = true;
+
+// const shouldDrive = hasDriversLicense && hasGoodVision && !isTired;
+// if (shouldDrive) {
+//     console.log("Sarah is able to drive");
+// } else {
+//     console.log("Someone else should drive");
+// }
+
+
+const day = 'monday';
+
+switch (day) {
+    case 'monday':
+        console.log('Plan course structure');
+        console.log('Go to coding meetup');
+        break;
+    case 'tuesday':
+        console.log('Prepare theory videos');
+        break;
+    case 'wednesday':
+    case 'thursday':
+        console.log('Write code examples');
+        break;
+    case 'friday':
+        console.log('Record videos');
+        break;
+    case 'saturday':
+    case 'sunday':
+        console.log('Enjoy the weekend');
+        break;
+    default:
+        console.log('Not a valid day!');
 }
