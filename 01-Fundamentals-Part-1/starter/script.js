@@ -123,3 +123,16 @@
 // let n = '1' + 1;
 // n = n - 1;
 // console.log(n);
+
+
+const age = '18';
+if (age === 18) console.log('You just turned 18 (strict)');
+if (age == 18) console.log('You just turned 18 (loose)');
+
+const favourite = Number(prompt("What;s your favourite number?"));
+console.log(favourite);
+console.log(typeof favourite);
+
+if (favourite === 18) {
+    console.log('Good choice');
+}

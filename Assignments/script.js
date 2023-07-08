@@ -31,3 +31,13 @@ if (population > 33) {
 } else {
     console.log(`${country}'s population is ${33 - population} below average`);
 }
+
+const numNeighbours = Number(prompt('How many neighbour countries does your country have?'));
+
+if (numNeighbours === 1) {
+    console.log('Only 1 border!');
+} else if (numNeighbours > 1) {
+    console.log("More than 1 border");
+} else {
+    console.log("No borders");
+}
