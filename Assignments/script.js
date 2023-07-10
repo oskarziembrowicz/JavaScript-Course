@@ -1,3 +1,7 @@
+'use strict'
+
+/*
+
 const country = "Poland";
 const continent = "Europe";
 let population = 33;
@@ -41,3 +45,15 @@ if (numNeighbours === 1) {
 } else {
     console.log("No borders");
 }
+
+*/
+
+function describeCountry(country, population, capitalCity) {
+    return `${country} has ${population} million people and its capital city is ${capitalCity}`;
+}
+
+const c1 = describeCountry('Poland', 23, "Warsaw");
+const c2 = describeCountry("Spain", 27, "Madrit");
+const c3 = describeCountry("Great Britain", 20, "London");
+
+console.log(c1, c2, c3);
