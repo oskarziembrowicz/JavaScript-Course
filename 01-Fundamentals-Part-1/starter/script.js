@@ -187,10 +187,12 @@
 // }
 
 
-const age = 20;
-age >= 18 ? console.log("I like to dring wine 🍷") : console.log("I like to drink milk 🥛");
+// const age = 20;
+// age >= 18 ? console.log("I like to dring wine 🍷") : console.log("I like to drink milk 🥛");
 
-const drink = age >= 18 ? 'wine 🍷' : 'milk 🥛';
-console.log(drink);
+// const drink = age >= 18 ? 'wine 🍷' : 'milk 🥛';
+// console.log(drink);
 
-console.log(`I like to drink ${age >= 18 ? 'wine 🍷' : 'milk 🥛'}`);
+// console.log(`I like to drink ${age >= 18 ? 'wine 🍷' : 'milk 🥛'}`);
+
+
