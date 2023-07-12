@@ -137,7 +137,7 @@ myCountry["population"] -= 2;
 myCountry.describe();
 console.log(myCountry.checkIsland());
 
-*/
+
 
 const mark = {
     fullName: "Mark Miller",
@@ -166,3 +166,31 @@ if (mark.calcBMI() > john.calcBMI()) {
 } else {
     console.log(`${john.fullName}'s BMI (${john.BMI}) is higher than ${mark.fullName}'s (${mark.BMI})`);
 }
+
+*/
+
+const calcTip = function (bill) {
+    return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+}
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 110, 86, 52];
+
+const tips = [];
+const totals = [];
+
+for (let i = 0; i < bills.length; i++) {
+    tips[i] = calcTip(bills[i]);
+    totals.push(tips[i] + bills[i]);
+}
+
+console.log(tips, totals);
+
+function calcAverage(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum / arr.length;
+}
+
+console.log(calcAverage(totals));
