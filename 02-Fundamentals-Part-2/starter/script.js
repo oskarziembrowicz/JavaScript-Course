@@ -140,7 +140,7 @@ console.log(age1, age2, age3);
 const ages = [calcAge1(years[0]), calcAge1(years[1]), calcAge1(years[years.length - 1])];
 console.log(ages);
 
-*/
+
 
 const friends = ["Michael", "Steven", "Peter"];
 
@@ -172,3 +172,38 @@ console.log(friends.includes(23));
 if (friends.includes("Steven")) {
     console.log("You have a friend called Steven.");
 }
+
+*/
+
+// Object literal syntax
+const oscar = {
+    firstName: "Oscar",
+    lastName: "Lastname",
+    age: 2037 - 2002,
+    job: "programmer",
+    friends: ["Michael", "Peter", "Steven"]
+};
+console.log(oscar);
+
+console.log(oscar.lastName);
+console.log(oscar["lastName"]);
+
+const nameKey = "Name";
+console.log(oscar["first" + nameKey]);
+console.log(oscar["last" + nameKey]);
+
+const interestedIn = prompt("What do you want to know about Oscar? Choose between firstName, lastName, age, job, and friends");
+
+if (oscar[interestedIn]) {
+    console.log(oscar[interestedIn]);
+} else {
+    console.log("Wrong request! Choose between firstName, lastName, age, job, and friends");
+}
+
+oscar.location = "Poland";
+oscar["twitter"] = "@oziembrowicz";
+console.log(oscar);
+
+// Challange
+// "Oscar has 3 friends and his best friend is called Michael"
+console.log(`${oscar.firstName} has ${oscar.friends.length} friends, and his best friend is called ${oscar.friends[0]}`);
