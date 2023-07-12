@@ -96,7 +96,7 @@ scoreKoalas = calcAverage(23, 34, 27);
 
 checkWinner(scoreDolphins, scoreKoalas);
 
-*/
+
 
 function calcTip(bill) {
     if (bill >= 50 && bill <= 300) {
@@ -109,3 +109,60 @@ function calcTip(bill) {
 const bills = [125, 555, 44];
 const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 const totals = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
+
+
+
+const myCountry = {
+    country: "Poland",
+    capital: "Warsaw",
+    language: "polish",
+    population: 23,
+    neighbours: ["Germany", "Ukraine", "Russia"],
+
+    describe: function () {
+        console.log(`${this.country} has ${this.population} million ${this.language}-speaking peaople, ${this.neighbours.length} neighbouring countries and a capital called ${this.capital}.`);
+    },
+
+    checkIsland: function () {
+        this.isIsland = this.neighbours.length ? false : true;
+        return this.isIsland
+    }
+}
+
+console.log(`${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking peaople, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}.`);
+
+myCountry.population += 2;
+myCountry["population"] -= 2;
+
+myCountry.describe();
+console.log(myCountry.checkIsland());
+
+*/
+
+const mark = {
+    fullName: "Mark Miller",
+    mass: 78,
+    height: 1.69,
+
+    calcBMI: function () {
+        this.BMI = this.mass / (this.height * this.height);
+        return this.BMI;
+    }
+};
+
+const john = {
+    fullName: "John Smith",
+    mass: 92,
+    height: 1.95,
+
+    calcBMI: function () {
+        this.BMI = this.mass / (this.height * this.height);
+        return this.BMI;
+    }
+};
+
+if (mark.calcBMI() > john.calcBMI()) {
+    console.log(`${mark.fullName}'s BMI (${mark.BMI}) is higher than ${john.fullName}'s (${john.BMI})`);
+} else {
+    console.log(`${john.fullName}'s BMI (${john.BMI}) is higher than ${mark.fullName}'s (${mark.BMI})`);
+}

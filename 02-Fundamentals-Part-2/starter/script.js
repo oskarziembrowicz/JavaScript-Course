@@ -173,7 +173,7 @@ if (friends.includes("Steven")) {
     console.log("You have a friend called Steven.");
 }
 
-*/
+
 
 // Object literal syntax
 const oscar = {
@@ -207,3 +207,42 @@ console.log(oscar);
 // Challange
 // "Oscar has 3 friends and his best friend is called Michael"
 console.log(`${oscar.firstName} has ${oscar.friends.length} friends, and his best friend is called ${oscar.friends[0]}`);
+
+*/
+
+const oscar = {
+    firstName: "Oscar",
+    lastName: "Lastname",
+    birthYear: 2002,
+    job: "programmer",
+    friends: ["Michael", "Peter", "Steven"],
+    hasDriverLicense: true,
+
+    // calcAge: function (birthYear) {
+    //     return 2037 - birthYear;
+    // }
+
+    // calcAge: function () {
+    //     return 2037 - this.birthYear;
+    // }
+
+    calcAge: function () {
+        this.age = 2037 - this.birthYear
+        return this.age;
+    },
+
+    getSummary: function () {
+        return `${this.firstName} is a ${this.calcAge()}-year old ${this.job}, and he has ${this.hasDriverLicense ? 'a' : 'no'} drivers license.`;
+    }
+};
+
+console.log(oscar.calcAge());
+
+console.log(oscar.age);
+console.log(oscar.age);
+console.log(oscar.age);
+
+//Challenge
+// "Oscar is a 43-year old programmer, and he has a/no drivers license."
+
+console.log(oscar.getSummary());
