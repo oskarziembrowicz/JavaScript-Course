@@ -42,7 +42,7 @@ function calcAge(birthYear) {
 const firstName = 'Oscar';
 calcAge(2002);
 
-*/
+
 
 //'THIS' KEYWORD IN FUNCTIONS
 
@@ -96,3 +96,24 @@ var addArrow = (a, b) => {
 };
 
 addArrow(2, 5, 8);
+
+*/
+
+// Primitives vs Objects
+
+let age = 30;
+let oldAge = age;
+age = 31;
+console.log(age);
+console.log(oldAge);
+
+const me = {
+  name: 'Oskar',
+  age: 20,
+};
+
+const friend = me;
+friend.age = 27;
+
+console.log(me);
+console.log(friend);
