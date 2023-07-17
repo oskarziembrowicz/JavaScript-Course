@@ -87,7 +87,7 @@ const greet1 = greeting => name => console.log(`${greeting} ${name}`);
 
 greet1('Howdy')('partner');
 
-*/
+
 
 // THE BIND METHOD
 
@@ -124,3 +124,50 @@ function setTaxRate(rate) {
 }
 const addVAT2 = setTaxRate(0.23);
 console.log(addVAT2(100));
+
+*/
+
+// CODING CHALLANGE #1
+
+// Create registerNewAnswer
+
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  answers: new Array(4).fill(0),
+  registerNewAnswer() {
+    const input = Number(
+      prompt(
+        `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+      )
+    );
+    console.log(input);
+
+    if (typeof input === 'number' && input < this.answers.length) {
+      3;
+      this.answers[input]++;
+    } else {
+      console.log('incorrect answer');
+    }
+    this.displayResults();
+    this.displayResults('string');
+  },
+  displayResults(type = 'array') {
+    if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    } else if (type === 'array') {
+      console.log(this.answers);
+    }
+  },
+};
+
+// poll.registerNewAnswer();
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+
+// [5,2,3]
+// [1,5,3,9,6,1]
