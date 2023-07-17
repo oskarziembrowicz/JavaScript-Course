@@ -67,7 +67,7 @@ const high5 = function () {
 document.body.addEventListener('click', high5);
 ['Oscar', 'Adam', 'Martha'].forEach(high5);
 
-*/
+
 
 // FUNCTIONS RETURNING FUNCTIONS
 
@@ -86,3 +86,41 @@ greet('Hello')('Oscar');
 const greet1 = greeting => name => console.log(`${greeting} ${name}`);
 
 greet1('Howdy')('partner');
+
+*/
+
+// THE BIND METHOD
+
+const lufthansa = {};
+
+// With event listeners
+
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+// lufthansa.buyPlane();
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+// addTax = value => value + value * 0.23;
+
+console.log(addVAT(100));
+
+function setTaxRate(rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+}
+const addVAT2 = setTaxRate(0.23);
+console.log(addVAT2(100));
