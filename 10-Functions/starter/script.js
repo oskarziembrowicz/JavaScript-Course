@@ -125,11 +125,9 @@ function setTaxRate(rate) {
 const addVAT2 = setTaxRate(0.23);
 console.log(addVAT2(100));
 
-*/
+
 
 // CODING CHALLANGE #1
-
-// Create registerNewAnswer
 
 const poll = {
   question: 'What is your favourite programming language?',
@@ -171,3 +169,24 @@ poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
 
 // [5,2,3]
 // [1,5,3,9,6,1]
+
+*/
+
+// CLOSURES
+
+function secureBooking() {
+  let passangerCount = 0;
+
+  return function () {
+    passangerCount++;
+    console.log(`${passangerCount} passangers`);
+  };
+}
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+console.dir(booker);
