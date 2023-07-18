@@ -199,7 +199,7 @@ console.log(depositsFor);
 const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);
 
-*/
+
 
 // REDUCE
 
@@ -226,3 +226,19 @@ const max = movements.reduce(
   movements[0]
 );
 console.log(max);
+
+*/
+
+// CHAINING METHODS
+
+const euroToUsd = 1.1;
+
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  // .map((mov, i, arr) => {
+  //   console.log(arr);
+  //   return mov * euroToUsd;
+  // })
+  .map(mov => mov * euroToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
