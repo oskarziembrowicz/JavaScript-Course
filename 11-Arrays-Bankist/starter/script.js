@@ -178,7 +178,7 @@ const movementsDescriptions = movements.map(
 );
 console.log(movementsDescriptions);
 
-*/
+
 
 // FILTER
 
@@ -198,3 +198,31 @@ console.log(depositsFor);
 
 const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);
+
+*/
+
+// REDUCE
+
+console.log(movements);
+
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
+
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+console.log(balance);
+
+let balanceFor = 0;
+for (const mov of movements) {
+  balanceFor += mov;
+}
+console.log(balanceFor);
+
+// Maximum value
+const max = movements.reduce(
+  (acc, mov) => (acc >= mov ? acc : mov),
+  movements[0]
+);
+console.log(max);
