@@ -79,7 +79,7 @@ console.log(arr.unique());
 const h1 = document.querySelector('h1');
 console.dir(x => x + 1);
 
-*/
+/
 
 // ES6 CLASSES
 
@@ -117,3 +117,30 @@ jessica.greet();
 // 1. Classes are NOT hoisted
 // 2. Classes are first class citizens
 // 3. Classes are executed always in strict mode
+
+*/
+
+// OBJECT.CREATE
+
+const PersonProto = {
+  clacAge: function () {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.firstName = 'Steven';
+steven.birthYear = 2002;
+steven.clacAge();
+
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.clacAge();
