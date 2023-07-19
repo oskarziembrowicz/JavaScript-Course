@@ -145,7 +145,7 @@ const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
 sarah.clacAge();
 
-*/
+
 
 // INHERITANCE BETWEEN CLASSES: CONSTRUCTOR FUNCTIONS
 
@@ -183,3 +183,50 @@ console.log(mike instanceof Object);
 
 Student.prototype.constructor = Student;
 console.log(Student.prototype.constructor);
+
+*/
+
+// INHERITANCE BETWEEN CLASSES: CONSTRUCTOR FUNCTIONS
+
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+
+  static hey() {
+    console.log('Hey there 👋');
+  }
+}
+
+class StudentCl extends PersonCl {
+  constructor(firstName, birthYear, course) {
+    // Always needs to happen first!
+    super(firstName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+  }
+
+  calcAge() {
+    console.log(
+      `I'm ${2037 - this.birthYear} years old, but as a student I feel like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+const martha = new StudentCl('Matha', 2012, 'Computer Science');
+martha.introduce();
+martha.calcAge();
