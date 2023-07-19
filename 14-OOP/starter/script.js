@@ -51,3 +51,25 @@ console.log(oscar.species, matilda.species);
 
 console.log(oscar.hasOwnProperty('firstName'));
 console.log(oscar.hasOwnProperty('species'));
+
+console.log(oscar.__proto__);
+// Pbject.prototype (top of chain)
+console.log(oscar.__proto__.__proto__);
+console.log(oscar.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor);
+
+const arr = [3, 5, 8, 1, 5, 8, 4]; // new Array === []
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+
+console.log(arr.__proto__.__proto__);
+
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+console.dir(x => x + 1);
