@@ -184,9 +184,9 @@ console.log(mike instanceof Object);
 Student.prototype.constructor = Student;
 console.log(Student.prototype.constructor);
 
-*/
 
-// INHERITANCE BETWEEN CLASSES: CONSTRUCTOR FUNCTIONS
+
+// INHERITANCE BETWEEN CLASSES: ES6 CLASSES
 
 class PersonCl {
   constructor(firstName, birthYear) {
@@ -230,3 +230,36 @@ class StudentCl extends PersonCl {
 const martha = new StudentCl('Matha', 2012, 'Computer Science');
 martha.introduce();
 martha.calcAge();
+
+*/
+
+// INHERITANCE BETWEEN CLASSES: OBJECT.CREATE
+
+const PersonProto = {
+  calcAge: function () {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2010, 'Computer Science');
+jay.introduce();
+jay.calcAge();
