@@ -106,7 +106,7 @@ class App {
   _loadMap(position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+    // console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
 
     const coords = [latitude, longitude];
 
@@ -198,7 +198,7 @@ class App {
 
     // Add new object to the workout array
     this.#workouts.push(workout);
-    console.log(workout);
+    // console.log(workout);
 
     // Render as map marker
     this._renderWorkoutMarker(workout);
@@ -286,14 +286,14 @@ class App {
 
   _moveToPopup(event) {
     const workoutElement = event.target.closest('.workout');
-    console.log(workoutElement);
+    // console.log(workoutElement);
     if (!workoutElement) return;
 
     const workout = this.#workouts.find(
       work => work.id === workoutElement.dataset.id
     );
 
-    console.log(workout);
+    // console.log(workout);
 
     this.#map.setView(workout.coords, this.#mapZoom, {
       animate: true,
@@ -312,7 +312,7 @@ class App {
 
   _getLocalStorage() {
     const data = JSON.parse(localStorage.getItem('workouts'));
-    console.log(data);
+    // console.log(data);
 
     if (!data) return;
 
@@ -320,6 +320,11 @@ class App {
     this.#workouts.forEach(workout => {
       this._renderWorkout(workout);
     });
+  }
+
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
   }
 }
 
