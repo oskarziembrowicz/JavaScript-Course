@@ -1,3 +1,16 @@
+//OPTIONAL
+// 1. Edit workout
+// 2. Delete workout
+// 3. Sort workouts
+// 4. Re-build workouts from localStorage
+// 5. Error and confirmation messages
+// HARD OPTIONAL
+// 6. Button to show all of the workouts at once
+// 7. Drawing lines and shapes instead of points
+// ASYNCHRONOUS OPTIONAL
+// 8. Geocode location from coordinates
+// 9. Display weather of workout time and place
+
 'use strict';
 
 class Workout {
