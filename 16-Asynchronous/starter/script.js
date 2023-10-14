@@ -31,6 +31,16 @@ function renderError(msg) {
   // countriesContainer.style.opacity = 1;
 }
 
+function getJSON(url, errorMsg = 'Something went wrong!') {
+  return fetch(url).then(response => {
+    if (!response.ok) {
+      throw new Error(`${errorMsg} (${response.status})`);
+    }
+
+    return response.json();
+  });
+}
+
 ///////////////////////////////////////
 
 /*
@@ -133,16 +143,6 @@ setTimeout(() => {
 //     });
 // }
 
-function getJSON(url, errorMsg = 'Something went wrong!') {
-  return fetch(url).then(response => {
-    if (!response.ok) {
-      throw new Error(`${errorMsg} (${response.status})`);
-    }
-
-    return response.json();
-  });
-}
-
 // function getCountryData(country) {
 //   // Country 1
 //   fetch(`https://restcountries.com/v3.1/name/${country}`)
@@ -180,6 +180,7 @@ function getJSON(url, errorMsg = 'Something went wrong!') {
 //     });
 // }
 
+/*
 function getCountryData(country) {
   // Country 1
   getJSON(`https://restcountries.com/v3.1/name/${country}`, 'Country not found')
@@ -210,3 +211,46 @@ btn.addEventListener('click', function () {
 });
 
 getCountryData('Australia');
+
+*/
+
+///////////////////////////////////////////
+
+// Coding challange #1
+
+function whereAmI(lat, lng) {
+  fetch(
+    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+  )
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Connection failed');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(`You are in ${data.address.city}, ${data.address.country}`);
+      return fetch(
+        `https://restcountries.com/v3.1/name/${data.address.country}`
+      );
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Connection failed');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data[0]);
+      renderCountry(data[0]);
+    })
+    .catch(err => {
+      console.log(`Something went wrong! Error: ${err}`);
+    })
+    .finally(() => (countriesContainer.style.opacity = 1));
+}
+
+whereAmI(52.508, 13.381);
+whereAmI(19.037, 72.873);
+whereAmI(-33.933, 18.474);
