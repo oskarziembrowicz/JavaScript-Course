@@ -3,6 +3,34 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
+function renderCountry(data, calssName = '') {
+  const html = `
+    <article class="country ${calssName}">
+            <img class="country__img" src="${data.flags.svg}" />
+            <div class="country__data">
+              <h3 class="country__name">${data.name.common}</h3>
+              <h4 class="country__region">${data.region}</h4>
+              <p class="country__row"><span>👫</span>${(
+                +data.population / 1000000
+              ).toFixed(2)}M people</p>
+              <p class="country__row"><span>🗣️</span>${
+                Object.values(data.languages)[0]
+              }</p>
+              <p class="country__row"><span>💰</span>${
+                Object.values(data.currencies)[0].name
+              }</p>
+            </div>
+          </article>
+    `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  // countriesContainer.style.opacity = 1;
+}
+
+function renderError(msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  // countriesContainer.style.opacity = 1;
+}
+
 ///////////////////////////////////////
 
 /*
@@ -38,29 +66,6 @@ function getCountryData(country) {
   });
 }
 */
-
-function renderCountry(data, calssName = '') {
-  const html = `
-    <article class="country ${calssName}">
-            <img class="country__img" src="${data.flags.svg}" />
-            <div class="country__data">
-              <h3 class="country__name">${data.name.common}</h3>
-              <h4 class="country__region">${data.region}</h4>
-              <p class="country__row"><span>👫</span>${(
-                +data.population / 1000000
-              ).toFixed(2)}M people</p>
-              <p class="country__row"><span>🗣️</span>${
-                Object.values(data.languages)[0]
-              }</p>
-              <p class="country__row"><span>💰</span>${
-                Object.values(data.currencies)[0].name
-              }</p>
-            </div>
-          </article>
-    `;
-  countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
-}
 
 /*
 function getCountryAndNeighbour(country) {
@@ -140,7 +145,18 @@ function getCountryData(country) {
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
     })
     .then(response => response.json())
-    .then(data => renderCountry(data[0], 'neighbour'));
+    .then(data => renderCountry(data[0], 'neighbour'))
+    .catch(err => {
+      console.log(`${err} 💥💥💥`);
+      renderError(`Something went wrong 🚫 ${err.message}. Try again!`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
 }
 
-getCountryData('poland');
+btn.addEventListener('click', function () {
+  getCountryData('poland');
+});
+
+getCountryData('sdgsga');
