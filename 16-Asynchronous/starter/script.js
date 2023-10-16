@@ -216,6 +216,8 @@ getCountryData('Australia');
 
 ///////////////////////////////////////////
 
+/*
+
 // Coding challange #1
 
 function whereAmI(lat, lng) {
@@ -224,7 +226,7 @@ function whereAmI(lat, lng) {
   )
     .then(response => {
       if (!response.ok) {
-        throw new Error('Connection failed');
+        throw new Error(`Connection failed ${response.status}`);
       }
       return response.json();
     })
@@ -237,7 +239,7 @@ function whereAmI(lat, lng) {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Connection failed');
+        throw new Error(`Connection failed ${response.status}`);
       }
       return response.json();
     })
@@ -254,3 +256,52 @@ function whereAmI(lat, lng) {
 whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
+
+*/
+
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log('Lottery draw is happening');
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve('You win!');
+    } else {
+      reject(new Error('You lost your money'));
+    }
+  }, 2000);
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+// Promisifying setTimeout
+function wait(seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+}
+
+wait(1)
+  .then(() => {
+    console.log('1 second passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('2 seconds passed');
+    wait(1);
+  })
+  .then(() => console.log('3 seconds passed'));
+
+// setTimeout(() => {
+//   console.log('1 second passed');
+//   setTimeout(() => {
+//     console.log('2 seconds passed');
+//     setTimeout(() => {
+//       console.log('3 seconds passed');
+//       setTimeout(() => {
+//         console.log('4 seconds passed');
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+Promise.resolve('abc').then(x => console.log(x));
+Promise.reject('abc').catch(x => console.error(x));
