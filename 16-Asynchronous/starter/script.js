@@ -259,6 +259,9 @@ whereAmI(-33.933, 18.474);
 
 */
 
+// BUILDING A SIMPLE PROMISE
+
+/*
 const lotteryPromise = new Promise(function (resolve, reject) {
   console.log('Lottery draw is happening');
   setTimeout(function () {
@@ -272,7 +275,7 @@ const lotteryPromise = new Promise(function (resolve, reject) {
 
 lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
 
-// Promisifying setTimeout
+Promisifying setTimeout
 function wait(seconds) {
   return new Promise(function (resolve) {
     setTimeout(resolve, seconds * 1000);
@@ -290,18 +293,134 @@ wait(1)
   })
   .then(() => console.log('3 seconds passed'));
 
-// setTimeout(() => {
-//   console.log('1 second passed');
-//   setTimeout(() => {
-//     console.log('2 seconds passed');
-//     setTimeout(() => {
-//       console.log('3 seconds passed');
-//       setTimeout(() => {
-//         console.log('4 seconds passed');
-//       }, 1000);
-//     }, 1000);
-//   }, 1000);
-// }, 1000);
+setTimeout(() => {
+  console.log('1 second passed');
+  setTimeout(() => {
+    console.log('2 seconds passed');
+    setTimeout(() => {
+      console.log('3 seconds passed');
+      setTimeout(() => {
+        console.log('4 seconds passed');
+      }, 1000);
+    }, 1000);
+  }, 1000);
+}, 1000);
 
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject('abc').catch(x => console.error(x));
+
+*/
+
+//////////////////////////////////////////////////
+
+// PROMISIFYING THE GEOLOCATION API
+
+/*
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+// getPosition().then(pos => console.log(pos));
+
+function whereAmI() {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+
+      return fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+      );
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Connection failed ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(`You are in ${data.address.city}, ${data.address.country}`);
+      return fetch(
+        `https://restcountries.com/v3.1/name/${data.address.country}`
+      );
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Connection failed ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data[0]);
+      renderCountry(data[0]);
+    })
+    .catch(err => {
+      console.log(`Something went wrong! Error: ${err}`);
+    })
+    .finally(() => (countriesContainer.style.opacity = 1));
+}
+
+btn.addEventListener('click', whereAmI);
+
+*/
+
+//////////////////////////////////////////
+
+// CODING CHALLANGE 2
+
+const imgContainer = document.querySelector('.images');
+
+function createImage(imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement('img');
+    img.src = imgPath;
+
+    img.addEventListener('load', function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener('error', function () {
+      reject('Image not found');
+    });
+  });
+}
+
+function wait(seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+}
+
+let global_img;
+
+createImage('img/img-1.jpg')
+  .then(img => {
+    global_img = img;
+    return wait(2);
+  })
+  .then(() => {
+    console.log('Hide image');
+    global_img.style.display = 'none';
+    return wait(2);
+  })
+  .then(() => {
+    return createImage('img/img-2.jpg');
+  })
+  .then(img => {
+    console.log('Show next image');
+    global_img = img;
+    return wait(2);
+  })
+  .then(() => {
+    console.log('Hide image');
+    global_img.style.display = 'none';
+  })
+  .catch(err => console.error(err));
