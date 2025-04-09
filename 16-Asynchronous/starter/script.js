@@ -8,7 +8,7 @@ function renderCountry(data, calssName = '') {
     <article class="country ${calssName}">
             <img class="country__img" src="${data.flags.svg}" />
             <div class="country__data">
-              <h3 class="country__name">${data.name.common}</h3>
+              <h3 class="country__name">${data.name}</h3>
               <h4 class="country__region">${data.region}</h4>
               <p class="country__row"><span>👫</span>${(
                 +data.population / 1000000
@@ -375,6 +375,7 @@ btn.addEventListener('click', whereAmI);
 
 // CODING CHALLANGE 2
 
+/*
 const imgContainer = document.querySelector('.images');
 
 function createImage(imgPath) {
@@ -424,3 +425,31 @@ createImage('img/img-1.jpg')
     global_img.style.display = 'none';
   })
   .catch(err => console.error(err));
+*/
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function () {
+  // Geolocation
+  const pos = await getPosition();
+  const { latitude: lat, longitude: lng } = pos.coords;
+
+  // Reverse geocoding
+  const resGeo = await fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+  );
+  const dataGeo = await resGeo.json();
+
+  // Country data
+  const res = await fetch(
+    `https://restcountries.com/v2/name/${dataGeo.countryName}`
+  );
+  const data = await res.json();
+  renderCountry(data[0]);
+};
+
+whereAmI();
