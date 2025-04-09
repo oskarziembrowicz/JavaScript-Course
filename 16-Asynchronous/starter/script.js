@@ -434,22 +434,31 @@ const getPosition = function () {
 };
 
 const whereAmI = async function () {
-  // Geolocation
-  const pos = await getPosition();
-  const { latitude: lat, longitude: lng } = pos.coords;
+  try {
+    // Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
 
-  // Reverse geocoding
-  const resGeo = await fetch(
-    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
-  );
-  const dataGeo = await resGeo.json();
+    // Reverse geocoding
+    const resGeo = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+    );
 
-  // Country data
-  const res = await fetch(
-    `https://restcountries.com/v2/name/${dataGeo.countryName}`
-  );
-  const data = await res.json();
-  renderCountry(data[0]);
+    if (!resGeo.ok) throw new Error('Problem getting location data...');
+
+    const dataGeo = await resGeo.json();
+
+    // Country data
+    const res = await fetch(
+      `https://restcountries.com/v2/name/${dataGeo.countryName}`
+    );
+    if (!res.ok) throw new Error('Problem getting country data...');
+
+    const data = await res.json();
+    renderCountry(data[0]);
+  } catch (err) {
+    console.error(`${err} 💥`);
+    renderError('Something went wrong: ' + err.message);
+  }
 };
-
 whereAmI();
