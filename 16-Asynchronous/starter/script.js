@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-const btn = document.querySelector('.btn-country');
-const countriesContainer = document.querySelector('.countries');
+const btn = document.querySelector(".btn-country");
+const countriesContainer = document.querySelector(".countries");
 
-function renderCountry(data, calssName = '') {
+function renderCountry(data, calssName = "") {
   const html = `
     <article class="country ${calssName}">
             <img class="country__img" src="${data.flags.svg}" />
@@ -22,16 +22,16 @@ function renderCountry(data, calssName = '') {
             </div>
           </article>
     `;
-  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.insertAdjacentHTML("beforeend", html);
   // countriesContainer.style.opacity = 1;
 }
 
 function renderError(msg) {
-  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.insertAdjacentText("beforeend", msg);
   // countriesContainer.style.opacity = 1;
 }
 
-function getJSON(url, errorMsg = 'Something went wrong!') {
+function getJSON(url, errorMsg = "Something went wrong!") {
   return fetch(url).then(response => {
     if (!response.ok) {
       throw new Error(`${errorMsg} (${response.status})`);
@@ -427,6 +427,10 @@ createImage('img/img-1.jpg')
   .catch(err => console.error(err));
 */
 
+//////////////////////////////////////////
+
+// ASYNC FUNCTIONS
+/*
 const getPosition = function () {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -484,3 +488,24 @@ console.log('1: Will get location');
   }
   console.log('3: Finished getting location');
 })();
+*/
+
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    // const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`);
+    // const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`);
+    // const [data3] = await getJSON(`https://restcountries.com/v2/name/${c3}`);
+
+    const data = await Promise.all([
+      getJSON(`https://restcountries.com/v2/name/${c1}`),
+      getJSON(`https://restcountries.com/v2/name/${c2}`),
+      getJSON(`https://restcountries.com/v2/name/${c3}`),
+    ]);
+
+    console.log(data.map(d => d[0].capital));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+get3Countries("poland", "canada", "japan");
