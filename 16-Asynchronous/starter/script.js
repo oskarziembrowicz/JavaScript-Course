@@ -14,7 +14,7 @@ function renderCountry(data, calssName = '') {
                 +data.population / 1000000
               ).toFixed(2)}M people</p>
               <p class="country__row"><span>🗣️</span>${
-                Object.values(data.languages)[0]
+                Object.values(data.languages)[0].name
               }</p>
               <p class="country__row"><span>💰</span>${
                 Object.values(data.currencies)[0].name
@@ -455,10 +455,32 @@ const whereAmI = async function () {
     if (!res.ok) throw new Error('Problem getting country data...');
 
     const data = await res.json();
+    console.log(data[0]);
     renderCountry(data[0]);
+
+    return `You are in ${dataGeo.city}, ${dataGeo.countryName}`;
   } catch (err) {
     console.error(`${err} 💥`);
     renderError('Something went wrong: ' + err.message);
+
+    // Reject promise
+    throw err;
   }
 };
-whereAmI();
+
+console.log('1: Will get location');
+
+// whereAmI()
+//   .then(city => console.log(`2: ${city}`))
+//   .catch(err => console.error(`2: ${err.message} 💥`))
+//   .finally(() => console.log('3: Finished getting location'));
+
+(async function () {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.error(`2: ${err.message} 💥`);
+  }
+  console.log('3: Finished getting location');
+})();
