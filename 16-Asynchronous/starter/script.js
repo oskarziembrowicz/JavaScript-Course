@@ -515,7 +515,11 @@ const get3Countries = async function (c1, c2, c3) {
 get3Countries("poland", "canada", "japan");
 */
 
-// Promise.rece
+//////////////////////////////////////////
+// PROMISE COMBINATORS
+
+/*
+// Promise.race
 (async function () {
   const res = await Promise.race([
     getJSON(`https://restcountries.com/v2/name/italy`),
@@ -555,3 +559,60 @@ Promise.any([
 ])
   .then(res => console.log(res))
   .catch(err => console.error(err));
+*/
+
+//////////////////////////////////
+// CODING CHALLANGE 3
+
+const imgContainer = document.querySelector(".images");
+
+function createImage(imgPath) {
+  return new Promise(function (resolve, reject) {
+    const img = document.createElement("img");
+    img.src = imgPath;
+
+    img.addEventListener("load", function () {
+      imgContainer.append(img);
+      resolve(img);
+    });
+
+    img.addEventListener("error", function () {
+      reject("Image not found");
+    });
+  });
+}
+
+function wait(seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+}
+
+const loadNPause = async function () {
+  try {
+    let img = await createImage("img/img-1.jpg");
+    console.log(img);
+    await wait(2);
+
+    console.log("Hide image");
+    img.style.display = "none";
+    await wait(2);
+
+    console.log("Show next image");
+    img = await createImage("img/img-2.jpg");
+    await wait(2);
+
+    console.log("Hide image");
+    img.style.display = "none";
+  } catch (err) {
+    console.error(err);
+  }
+};
+// loadNPause();
+
+const loadAll = async function (imgArr) {
+  const imgs = await Promise.all(imgArr.map(img => createImage(img)));
+  imgs.forEach(img => img.classList.add("parallel"));
+};
+
+loadAll(["img/img-1.jpg", "img/img-2.jpg", "img/img-3.jpg"]);
