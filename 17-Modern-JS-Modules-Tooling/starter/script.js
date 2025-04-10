@@ -15,3 +15,29 @@ add('apple', 7);
 add('pizza', 2);
 add('bread', 5);
 console.log(cart);
+
+/////////////////////////////////////////
+// TOP LEVEL AWAIT
+
+/*
+// const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+// const data = await res.json();
+// console.log(data);
+// console.log('Something');
+
+const getLastPost = async function () {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const data = await res.json();
+  console.log(data);
+
+  return { title: data.title };
+};
+
+// Approach 1:
+// const lastPost = getLastPost();
+// lastPost.then(last => console.log(last));
+
+// Approach 2:
+const lastPost = await getLastPost();
+console.log(lastPost);
+*/
